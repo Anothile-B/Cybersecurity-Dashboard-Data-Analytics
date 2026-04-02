@@ -92,4 +92,4 @@ app.layout = html.Div(style={'backgroundColor':'#1e1e1e', 'color':'white', 'padd
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))

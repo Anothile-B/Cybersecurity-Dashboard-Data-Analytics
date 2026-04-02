@@ -3,22 +3,16 @@ import pandas as pd
 from dash import Dash, dcc, html
 import plotly.express as px
 
-# ------------------------------
-# Step 1: Load the Excel data
-# ------------------------------
+#Import from excel
 df = pd.read_excel("Cybersecurity_Dashboard.xlsx", sheet_name="RawData")
 
-# ------------------------------
-# Step 2: Calculate KPIs
-# ------------------------------
+# KPIs calculation
 total_sessions = df['SessionID'].count()
 avg_duration = df['SessionDuration'].mean()
 high_severity = df[df['Severity'] == 'High'].shape[0]
 under_attack = df[df['Status'] == 'Under Attack'].shape[0]
 
-# ------------------------------
-# Step 3: Create Charts with Plotly
-# ------------------------------
+
 severity_counts = df['Severity'].value_counts().reset_index()
 severity_counts.columns = ['Severity', 'Count']
 
@@ -56,9 +50,7 @@ browser_chart = px.bar(
 
 )
 
-# ------------------------------
-# Step 4: Build Dash App Layout
-# ------------------------------
+#Dashboard Layout
 app = Dash(__name__)
 
 app.layout = html.Div(style={'backgroundColor':'#1e1e1e', 'color':'white', 'padding':'20px'}, children=[
@@ -98,8 +90,6 @@ app.layout = html.Div(style={'backgroundColor':'#1e1e1e', 'color':'white', 'padd
     ])
 ])
 
-# ------------------------------
-# Step 5: Run the app
-# ------------------------------
+
 if __name__ == '__main__':
     app.run(debug=True)
